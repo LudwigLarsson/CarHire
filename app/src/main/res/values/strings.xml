@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Car hire</string>
+    <string-array name="cars">
+        <item>Москвич 3</item>
+        <item>Lada Vesta</item>
+        <item>Nissan Skyline r34</item>
+    </string-array>
+</resources>
