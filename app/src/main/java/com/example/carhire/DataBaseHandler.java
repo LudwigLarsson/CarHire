@@ -55,6 +55,14 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    public int getLastClient() {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        //sqLiteDatabase.execSQL("SELECT * FROM " + tableName + " ORDER BY id DESC LIMIT 1" + ";");
+        String selectAll = "Select * from " + Util.CLIENTS_TABLE_NAME + ";";
+        Cursor cursor = sqLiteDatabase.rawQuery(selectAll, null);
+        return cursor.getCount() - 1;
+    }
+
     public void deleteAll(String tableName){
         SQLiteDatabase db = this.getWritableDatabase();
         switch (tableName) {
@@ -107,7 +115,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 Util.TRANSACTION_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
         while (cursor != null && cursor.moveToNext()) {
             Transaction transaction = new Transaction(Integer.parseInt(cursor.getString(0)),
-                    Integer.parseInt(cursor.getString(1)), cursor.getString(2), Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+                    Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)), cursor.getString(3), Integer.parseInt(cursor.getString(4)), Integer.parseInt(cursor.getString(5)));
             cursor.close();
             return transaction;
         }
@@ -122,8 +130,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(Util.CLIENTS_TABLE_NAME, new String[]{Util.CLIENT_ID, Util.CLIENT_NAME, Util.CLIENT_SURNAME, Util.CLIENT_PHONE, Util.CLIENT_TRANSACTIONS_NUM},
                 Util.CLIENT_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
         while (cursor != null && cursor.moveToNext()) {
-            Client client = new Client(cursor.getString(0),
-                    cursor.getString(1), cursor.getString(2), Integer.parseInt(cursor.getString(3)));
+            Client client = new Client(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                    cursor.getString(2), cursor.getString(3), Integer.parseInt(cursor.getString(4)));
             cursor.close();
             return client;
         }

@@ -1,16 +1,26 @@
 package com.example.carhire;
 
 public class Client {
+    int id;
     private String clientName;
     private String clientSurname;
     private String clientPhone;
     private int clientTransactionNum;
 
-    public Client(String clientName, String clientSurname, String clientPhone, int clientTransactionNum) {
+    public Client(int id, String clientName, String clientSurname, String clientPhone, int clientTransactionNum) {
+        this.id = id;
         this.clientName = clientName;
         this.clientSurname = clientSurname;
         this.clientPhone = clientPhone;
         this.clientTransactionNum = clientTransactionNum;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getClientTransactionNum() {

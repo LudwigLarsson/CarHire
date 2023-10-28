@@ -60,16 +60,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((MyHolder) holder).value.setText(String.valueOf(transaction.getId()));
         ((MyHolder) holder).name.setText(String.valueOf(client.getClientName()));
         ((MyHolder) holder).surname.setText(String.valueOf(client.getClientSurname()));
+        Log.d("bdsurnamee", client.getClientSurname());
         ((MyHolder) holder).brand.setText(String.valueOf(car.getCarBrand()));
         ((MyHolder) holder).date.setText(String.valueOf(transaction.getHireDate()));
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Util.changeI = transaction.getId();
                 Intent intent=new Intent(context, EditActivity.class);
+                intent.putExtra("id", transaction.getId());
                 context.startActivity(intent);
             }
-        });*/
+        });
     }
     @Override
     public int getItemCount() {
